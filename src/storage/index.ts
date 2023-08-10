@@ -1,4 +1,4 @@
-import { MMKV } from 'react-native-mmkv';
+import {MMKV} from 'react-native-mmkv';
 
 export const storage = new MMKV();
 
@@ -14,6 +14,9 @@ export const storagePushArray = (name: string, item: any) => {
   const currentStored = JSON.parse(rawArray);
 
   if (!(currentStored instanceof Array)) return;
+
+  if (currentStored.find(product => String(product.id) == String(item.id)))
+    return currentStored;
 
   const newArray = [...currentStored, item];
 
